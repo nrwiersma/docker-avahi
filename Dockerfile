@@ -4,8 +4,9 @@ MAINTAINER Nicholas Wiersma <nick@wiersma.co.za>
 
 RUN apk add --no-cache avahi
 
-COPY entrypoint.sh /entrypoint.sh
+RUN mkdir -p /var/run/dbus
+VOLUME /var/run/dbus
 
 EXPOSE 5353/udp
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT avahi-daemon --no-drop-root
